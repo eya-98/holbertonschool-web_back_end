@@ -2,7 +2,7 @@
 """Write a type-annotated function"""
 
 
-def add(a: float, b:float) -> float:
+def add(a: float, b: float) -> float:
     """sum funtion"""
-    
+
     return a + b
