@@ -18,6 +18,7 @@ class FIFOCache(BaseCaching):
             print('DISCARD:', end='')
             print(list(self.cache_data)[0])
             self.cache_data.pop(list(self.cache_data)[0])
+            self.cache_data[key] = item
         else:
             self.cache_data[key] = item
 
