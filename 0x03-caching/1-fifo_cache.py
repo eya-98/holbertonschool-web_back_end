@@ -11,15 +11,16 @@ class FIFOCache(BaseCaching):
 
     def put(self, key, item):
         """add item or update it"""
-        if key is not None and item is not None:
-            if len(self.cache_data) + 1 > BaseCaching.MAX_ITEMS \
-                    and key not in self.cache_data.keys():
-                print('DISCARD:', end='')
-                print(list(self.cache_data)[0])
-                self.cache_data.pop(list(self.cache_data)[0])
-                self.cache_data[key] = item
-            else:
-                self.cache_data[key] = item
+        if key is None or item is None:
+            pass
+        elif len(self.cache_data) + 1 > BaseCaching.MAX_ITEMS \
+                and key not in self.cache_data.keys():
+            print('DISCARD:', end='')
+            print(list(self.cache_data)[0])
+            self.cache_data.pop(list(self.cache_data)[0])
+            self.cache_data[key] = item
+        else:
+            self.cache_data[key] = item
 
     def get(self, key):
         """"get item from the cache dict"""
