@@ -4,6 +4,7 @@ BaseCaching = __import__('base_caching').BaseCaching
 
 
 class LRUCache(BaseCaching):
+    """LRU class"""
     keysList = []
 
     def __init__(self):
