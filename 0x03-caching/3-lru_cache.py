@@ -5,7 +5,7 @@ BaseCaching = __import__('base_caching').BaseCaching
 
 
 class LRUCache(BaseCaching):
-    """LRU class"""
+    """LRU class inherit from BaseCaching"""
 
     def __init__(self):
         """init function"""
