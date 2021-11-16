@@ -35,6 +35,7 @@ class Server:
     def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
         """get page"""
         assert type(page) is int and type(page_size) is int
+        assert page > 0 and page_size > 0
         if page * page_size > len(self.dataset()) or page * page_size < 0:
             return []
         else:
