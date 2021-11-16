@@ -18,6 +18,7 @@ class Server:
     DATA_FILE = "Popular_Baby_Names.csv"
 
     def __init__(self):
+        """init method"""
         self.__dataset = None
 
     def dataset(self) -> List[List]:
@@ -32,6 +33,7 @@ class Server:
         return self.__dataset
 
     def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
+        """get page"""
         assert type(page) is int and type(page_size) is int
         if page * page_size > len(self.dataset()) or page * page_size < 0:
             return []
