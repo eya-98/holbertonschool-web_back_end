@@ -52,5 +52,5 @@ class Server:
         dict['page'] = page
         dict['data'] = self.get_page(page, page_size)
         dict['next_page'] = page + 1
-        dict['previous_page'] = page - 1
+        dict['prev_page'] = page - 1
         return(dict)
