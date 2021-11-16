@@ -7,11 +7,14 @@ import csv
 import math
 from typing import List, Dict
 
+
 def index_range(page: int, page_size: int):
     """index range"""
     a = (page - 1) * page_size
     b = page * page_size
     return (a, b)
+
+
 class Server:
     """Server class to paginate a database of popular baby names.
     """
@@ -42,7 +45,7 @@ class Server:
                 i: dataset[i] for i in range(len(dataset))
             }
         return self.__indexed_dataset
-    
+
     def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
         """get page"""
         assert type(page) is int and type(page_size) is int
@@ -55,6 +58,7 @@ class Server:
             return (self.__dataset[index_start:index_end])
 
     def get_hyper_index(self, index: int = None, page_size: int = 10) -> Dict:
+        """hyper index"""
         assert index > 0 and index < len(self.dataset())
         next_index = index + page_size
         data = self.get_page(int(index / page_size), page_size)
