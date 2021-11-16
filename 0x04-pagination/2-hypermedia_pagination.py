@@ -3,6 +3,7 @@
 import csv
 import math
 from typing import List, Dict
+from math import ceil
 
 
 def index_range(page: int, page_size: int):
@@ -49,8 +50,15 @@ class Server:
         assert page > 0 and page_size > 0
         dict = {}
         dict['page_size'] = page_size
+        if (self.get_page(page, page_size) == []):
+            dict['page_size'] = 0
         dict['page'] = page
         dict['data'] = self.get_page(page, page_size)
         dict['next_page'] = page + 1
+        if (page + 1) * page_size > len(self.dataset()):
+            dict['next_page'] = None
         dict['prev_page'] = page - 1
+        if (page - 1) < 1:
+            dict['prev_page'] = None
+        dict['total_pages'] = int(len(self.__dataset) / page_size)
         return(dict)
