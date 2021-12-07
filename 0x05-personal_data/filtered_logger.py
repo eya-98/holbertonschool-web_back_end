@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """a function called filter_datum"""
 import re
-from typing import Str, List
+from typing import List
 
 
-def filter_datum(fields: List, radaction: Str, message: Str, separator: Str) -> Str:
+def filter_datum(fields: List, radaction: str, message: str, separator: str) -> str:
     """returns the log message obfuscated"""
     for i in range(len(fields)):
         pattern = re.search('{}=[^{}]*'.format(fields[i], separator), message).group()
