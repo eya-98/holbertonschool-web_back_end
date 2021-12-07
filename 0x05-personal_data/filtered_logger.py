@@ -5,7 +5,7 @@ from typing import List
 
 
 def filter_datum(
-        fields: List,
+        fields: List[str],
         radaction: str,
         message: str,
         separator: str) -> str:
