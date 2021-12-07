@@ -4,7 +4,7 @@ import re
 from typing import Str, List
 
 
-def filter_datum(fields: List, radaction: Str, message: Str, separator: Str):
+def filter_datum(fields: List, radaction: Str, message: Str, separator: Str) -> Str:
     """returns the log message obfuscated"""
     for i in range(len(fields)):
         pattern = re.search('{}=[^{}]*'.format(fields[i], separator), message).group()
