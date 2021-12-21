@@ -91,10 +91,10 @@ def main():
     cursor.execute("SELECT * FROM users;")
     records = []
     for row in cursor:
-        msg = f"name={row[0]}; email={row[1]}; phone={row[2]}; " \
-              f"ssn={row[3]}; password={row[4]}; ip={row[5]}; " \
-              f"last_login={row[6]}; user_agent={row[7]};"
-        records.append(msg)
+        message = f"name={row[0]}; email={row[1]}; phone={row[2]}; " \
+            f"ssn={row[3]}; password={row[4]}; ip={row[5]}; " \
+            f"last_login={row[6]}; user_agent={row[7]};"
+        records.append(message)
 
     logger = get_logger()
     for record in records:
