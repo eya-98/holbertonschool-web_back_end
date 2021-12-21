@@ -3,6 +3,8 @@
 import re
 from typing import List
 import logging
+import os
+import mysql.connector
 PII_FIELDS = ("Name", "Address", "Email", "password", "ssn")
 
 
@@ -57,3 +59,43 @@ def get_logger() -> logging.Logger:
     loggers.setFormatter(formatter)
     logger.addHandler(loggers)
     return logger
+
+
+def get_db() -> mysql.connector.connection.MySQLConnection:
+    """returns a connector to the database"""
+    database = mysql.connector.connection.MySQLConnection(
+        user=os.getenv('PERSONAL_DATA_DB_USERNAME', 'root'),
+        password=os.getenv('PERSONAL_DATA_DB_PASSWORD', ''),
+        host=os.getenv('PERSONAL_DATA_DB_HOST', 'localhost'),
+        database=os.getenv('PERSONAL_DATA_DB_NAME')
+    )
+    return database
+
+
+def main():
+    """
+    Connects to the database `my_db` using `get_db` function, retrieves all
+    rows in the `users` table and display each row under a filtered format.
+    Filtered PII fields: name, email, phone, ssn, and password.
+    Format example:
+        [HOLBERTON] user_data INFO 2019-11-19 18:37:59,596: name=***;
+        email=***; phone=***; ssn=***; password=***;
+        ip=e848:e856:4e0b:a056:54ad:1e98:8110:ce1b;
+        last_login=2019-11-14T06:16:24; user_agent=Mozilla/5.0
+        (compatible; MSIE 9.0; Windows NT 6.1; WOW64; Trident/5.0; KTXN);
+    """
+    database = get_db()
+    cursor = database.cursor()
+    cursor.execute("SELECT * FROM users;")
+    records = []
+    for row in cursor:
+        msg = f"name={row[0]}; email={row[1]}; phone={row[2]}; " \
+              f"ssn={row[3]}; password={row[4]}; ip={row[5]}; " \
+              f"last_login={row[6]}; user_agent={row[7]};"
+        records.append(msg)
+
+    logger = get_logger()
+    for record in records:
+        logger.info(record)
+    cursor.close()
+    database.close()
