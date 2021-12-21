@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 """a function called filter_datum"""
-from _typeshed import Self
 import re
 from typing import List
 import logging
