@@ -12,7 +12,7 @@ class Auth:
         if path is not None and excluded_paths is not None:
             for excludedPath in excluded_paths:
                 if excludedPath.endswith('/'):
-                    folder = folder[:-1]
+                    excludedPath = excludedPath[:-1]
                 if excludedPath in path:
                     return False
         return True
