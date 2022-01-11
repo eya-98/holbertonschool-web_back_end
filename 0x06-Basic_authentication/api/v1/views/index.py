@@ -38,5 +38,5 @@ def unauthorized() -> str:
 @app_views.route('/forbidden', methods=['GET'], strict_slashes=False)
 def forbidden() -> str:
     """forbidden error"""
-    abort(403) 
+    abort(403)
     return jsonify({})
