@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """class BasicAuth that inherits"""
 from flask import request
-from typing import List, TypeVar
+from typing import List, TypeVar, Tuple
 from api.v1.auth.auth import Auth
 import base64
 
@@ -43,3 +43,19 @@ class BasicAuth(Auth):
             return str_bytes.decode('utf-8')
         except Exception:
             return None
+
+    def extract_user_credentials(
+            self, decoded_base64_authorization_header: str) -> (str, str):
+        """ returns the user email and password from the Base64 decoded value."""
+        if decoded_base64_authorization_header is None:
+            return (None, None)
+        if not isinstance(decoded_base64_authorization_header, str):
+            return (None, None)
+        toCheck = False
+        for i in decoded_base64_authorization_header:
+            if i == ":":
+                toCheck = True
+        print(toCheck)
+        if not toCheck:
+            return (None, None)
+        return(decoded_base64_authorization_header.split(":"))
