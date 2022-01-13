@@ -55,7 +55,6 @@ class BasicAuth(Auth):
         for i in decoded_base64_authorization_header:
             if i == ":":
                 toCheck = True
-        print(toCheck)
         if not toCheck:
             return (None, None)
         return(decoded_base64_authorization_header.split(":"))
