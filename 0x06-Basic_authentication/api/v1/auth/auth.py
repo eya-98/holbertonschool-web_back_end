@@ -11,7 +11,7 @@ class Auth:
         """public method that returns False"""
         if path is not None and excluded_paths is not None:
             for excludedPath in excluded_paths:
-                if excludedPath.endswith('/'):
+                if excludedPath.endswith('/') or excluded_paths.endswith('*'):
                     excludedPath = excludedPath[:-1]
                 if excludedPath in path:
                     return False
