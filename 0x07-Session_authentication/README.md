@@ -1,0 +1,1 @@
+In this project, we will implement a Session Authentication
