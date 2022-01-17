@@ -17,7 +17,7 @@ class SessionExpAuth(SessionAuth):
         self.session_duration = getenv("SESSION_DURATION")
         if self.session_duration is None:
             self.session_duration = 0
-        if self.session_duration.isdigit() == 0:
+        if self.session_duration.isdigit() is False:
             self.session_duration = int(self.session_duration)
         else:
             self.session_duration = 0
