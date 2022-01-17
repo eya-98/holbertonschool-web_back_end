@@ -21,7 +21,7 @@ def session_auth() -> str:
     user = User.search({"email": email})
     if user is None or len(user) == 0:
         return jsonify({"error": "no user found for this email"}), 404
-    if user[0].is_valid_password(password) is None:
+    if user[0].is_valid_password(password) is False:
         return jsonify({"error": "wrong password"}), 401
     from api.v1.app import auth
     sessionId = auth.create_session(user[0].id)
