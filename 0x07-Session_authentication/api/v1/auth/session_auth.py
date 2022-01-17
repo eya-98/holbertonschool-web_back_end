@@ -47,7 +47,13 @@ class SessionAuth(Auth):
         if sessionName is None:
             return False
         sessionID = self.user_id_for_session_id(sessionName)
+        print(sessionID)
         if sessionID is None:
             return False
-        self.user_id_by_session_id.pop(sessionID)
+        print(self.user_id_by_session_id)
+        for key,value in self.user_id_by_session_id.items():
+            if value == sessionID:
+                a = key
+        del self.user_id_by_session_id[a]
+        # self.user_id_by_session_id.pop(sessionID)
         return True
