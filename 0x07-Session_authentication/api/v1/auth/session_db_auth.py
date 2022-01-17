@@ -46,3 +46,5 @@ class SessionDBAuth(SessionExpAuth):
         if user is not None and len(user) > 0:
             user[0].remove()
             return True
+        else: 
+            return False
