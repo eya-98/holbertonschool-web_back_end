@@ -9,6 +9,7 @@ from api.v1.auth.session_auth import SessionAuth
 from os import getenv
 from api.v1.app import auth
 
+
 @app_views.route('/auth_session/login', methods=['POST'], strict_slashes=False)
 def session_auth() -> str:
     """create a session"""
@@ -40,4 +41,3 @@ def delete_and_logout_session() -> str:
         return abort(404)
     auth.destroy_session(request)
     return jsonify({}), 200
-# _my_session_id=91d82359-3dd0-4ff7-8702-5d014b1d542b

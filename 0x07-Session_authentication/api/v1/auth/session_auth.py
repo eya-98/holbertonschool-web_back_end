@@ -51,7 +51,7 @@ class SessionAuth(Auth):
         if sessionID is None:
             return False
         print(self.user_id_by_session_id)
-        for key,value in self.user_id_by_session_id.items():
+        for key, value in self.user_id_by_session_id.items():
             if value == sessionID:
                 a = key
         del self.user_id_by_session_id[a]
