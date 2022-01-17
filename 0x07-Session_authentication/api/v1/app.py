@@ -31,6 +31,9 @@ if getenv('AUTH_TYPE') == "session_exp_auth":
     from api.v1.auth.session_exp_auth import SessionExpAuth
     auth = SessionExpAuth()
 
+if getenv('auth_type') == "session_db_auth":
+    from api.v1.auth.session_db_auth import SessionDBAuth
+    auth = SessionDBAuth()
 
 @app.before_request
 def before_request():
