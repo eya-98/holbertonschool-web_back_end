@@ -3,10 +3,8 @@
 """
 from datetime import datetime
 from typing import TypeVar, List, Iterable
-from models import Base
+from models.base import Base
 from os import path
-import json
-import uuid
 
 
 class UserSession(Base):
