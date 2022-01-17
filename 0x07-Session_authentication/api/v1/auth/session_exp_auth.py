@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""class SessionAuth that inherits"""
+"""class SessionExpAuth that inherits from Session Auth"""
 from flask import request
 from typing import List, TypeVar, Tuple
 from api.v1.auth.session_auth import SessionAuth
