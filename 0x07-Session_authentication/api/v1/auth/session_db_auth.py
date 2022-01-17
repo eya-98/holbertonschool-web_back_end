@@ -12,12 +12,12 @@ class SessionDBAuth(SessionExpAuth):
     def create_session(self, user_id=None):
         """create session"""
         sessionID = super().create_session(user_id)
-        if id is None:
+        if sessionID is None:
             return None
         else:
-            session_data = {"user_id": user_id, "session_id": sessionID}
-            obj = UserSession(**session_data)
-            obj.save()
+            session = {"user_id": user_id, "session_id": sessionID}
+            UserSessions = UserSession(**session)
+            UserSessions.save()
             return sessionID
 
     def user_id_for_session_id(self, session_id=None):
