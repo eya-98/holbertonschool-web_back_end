@@ -29,3 +29,12 @@ class DB:
             DBSession = sessionmaker(bind=self._engine)
             self.__session = DBSession()
         return self.__session
+    
+    def add_user(self, email: str, hashed_password: str) -> User:
+        """add user"""
+        from user import User
+        user = User(email=email, hashed_password=hashed_password)
+        self._session.add(user)
+        self._session.commit()
+        return user
+    
