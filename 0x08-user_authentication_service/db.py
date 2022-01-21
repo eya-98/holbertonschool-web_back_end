@@ -31,9 +31,9 @@ class DB:
         """add a user"""
         from user import User
         try: 
-            user = User(email=email, hashed_password=hashed_password)
-            self._session.add(user)
+            db_user = User(email, hashed_password)
+            self._session.add(db_user)
             self._session.commit()
-            return user
+            return db_user
         except Exception: 
             pass
