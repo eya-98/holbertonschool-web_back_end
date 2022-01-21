@@ -4,12 +4,11 @@
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
-
-from user import Base, User
+from user import User
 
 
 class DB:
-
+    
     def __init__(self):
         """Initialize a new DB instance
         """
@@ -29,11 +28,10 @@ class DB:
 
     def add_user(self, email: str, hashed_password: str) -> User:
         """add a user"""
-        from user import User
         try:
             db_user = User(email, hashed_password)
             self._session.add(db_user)
             self._session.commit()
             return db_user
         except Exception:
-            return db_user
+            pass
