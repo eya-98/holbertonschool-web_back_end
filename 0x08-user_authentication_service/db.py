@@ -28,10 +28,7 @@ class DB:
 
     def add_user(self, email: str, hashed_password: str) -> User:
         """add a user"""
-        try:
-            db_user = User(email, hashed_password)
-            self._session.add(db_user)
-            self._session.commit()
-            return db_user
-        except Exception:
-            pass
+        db_user = User(email, hashed_password)
+        self._session.add(db_user)
+        self._session.commit()
+        return db_user
