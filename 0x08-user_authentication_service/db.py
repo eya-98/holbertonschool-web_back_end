@@ -8,7 +8,7 @@ from user import User, Base
 
 
 class DB:
-    
+
     def __init__(self):
         """Initialize a new DB instance
         """
