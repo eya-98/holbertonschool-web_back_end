@@ -23,7 +23,7 @@ def get_local():
 @app.route('/')
 def index():
     """render html template"""
-    return render_template('1-index.html')
+    return render_template('2-index.html')
 
 
 if __name__ == "__main__":
