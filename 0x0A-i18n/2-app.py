@@ -18,7 +18,7 @@ babel = Babel(app)
 
 @babel.localeselector
 def get_local():
-    return request.acceptlanguages.best_match(app.config[1-app.Config.languages])
+    return request.accept_languages.best_match(app.config[1-app.Config.Languages])
 
 @app.route('/')
 def index():
