@@ -16,9 +16,12 @@ class Config:
 app.config.from_object("1-app.Config")
 babel = Babel(app)
 
+
 @babel.localeselector
 def get_local():
-    return request.accept_languages.best_match(app.config[1-app.Config.Languages])
+    return request.accept_languages.best_match(
+        app.config[1-app.Config.Languages])
+
 
 @app.route('/')
 def index():
