@@ -3,24 +3,24 @@
 from flask import Flask, render_template
 from flask_babel import Babel
 app = Flask(__name__)
-babel = Babel(app)
 
 
 class config:
     """language configuration"""
     LANGUAGES = ["en", "fr"]
-    @babel.localeselector
-    def get_locale():
-        return 'en'
+    BABEL_DEFAULT_LOCALE = 'en'
+    BABEL_DEFAULT_TIMEZONE = 'UTC'
 
-    @babel.timezoneselector
-    def get_timezone():
-        return 'UTC'
+
+app.config.from_object("1-app.Config")
+babel = Babel(app)
+
 
 @app.route('/')
 def index():
     """render html template"""
     return render_template('1-index.html')
+
 
 if __name__ == "__main__":
     app.run(debug=True)
