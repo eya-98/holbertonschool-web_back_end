@@ -38,7 +38,7 @@ def get_locale():
 
 
 @babel.timezoneselector
-def get_timezone() -> str
+def get_timezone() -> str:
     """timezone config"""
     try:
         if request.args.get('timezone'):
@@ -48,7 +48,6 @@ def get_timezone() -> str
                 return timezone(request.args.get('timezone'))
     except UnknownTimeZoneError:
         return timezone(Config.BABEL_DEFAULT_TIMEZONE)
-
 
 
 @app.route('/')
