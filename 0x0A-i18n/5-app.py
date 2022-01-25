@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """setup a basic Flask app"""
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, g
 from flask_babel import Babel
 app = Flask(__name__)
 
@@ -42,14 +42,14 @@ def index():
 def get_user():
     """get user"""
     userID = request.args.get('login_as')
-    if userID in users.keys():
-        return users.get(int(userID))
+    if userID:
+        if int(userID) in users.keys():
+            return users.get(int(userID))
     return None
 
 
 @app.before_request
 def before_request():
-    """set a global object""""
     if get_user():
         g.user = get_user()
 
