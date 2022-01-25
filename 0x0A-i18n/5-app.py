@@ -50,6 +50,7 @@ def get_user():
 
 @app.before_request
 def before_request():
+    """set global variable"""
     if get_user():
         g.user = get_user()
 
