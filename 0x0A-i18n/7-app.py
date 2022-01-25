@@ -38,15 +38,16 @@ def get_locale():
 
 
 @babel.timezoneselector
-def get_timezone():
+def get_timezone() -> str
     """timezone config"""
     try:
         if request.args.get('timezone'):
             return timezone(request.args.get('timezone'))
-        elif g.user.get('timezone'):
-            return timezone(request.args.get('timezone'))
-    except pytz.exceptions.UnknownTimeZoneError:
-        return pytz.utc
+        elif hasattr(g, "user"):
+            if g.user.get('timezone'):
+                return timezone(request.args.get('timezone'))
+    except UnknownTimeZoneError:
+        return timezone(Config.BABEL_DEFAULT_TIMEZONE)
 
 
 
