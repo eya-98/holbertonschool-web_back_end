@@ -33,8 +33,6 @@ def get_locale():
         return g.user.get('locale')
     if request.headers.get('locale') in Config.LANGUAGES:
         return request.headers.get('locale')
-    return 'en'
-
 
 @app.route('/')
 def index():
