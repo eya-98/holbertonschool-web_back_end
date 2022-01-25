@@ -20,7 +20,7 @@ class Config:
     BABEL_DEFAULT_TIMEZONE = 'UTC'
 
 
-app.config.from_object("3-app.Config")
+app.config.from_object("6-app.Config")
 babel = Babel(app)
 
 
@@ -29,15 +29,16 @@ def get_locale():
     """language best match"""
     if request.args.get('locale') in Config.LANGUAGES:
         return request.args.get('locale')
-    if g.user.get('locale') in Config.LANGUAGES:
-        return g.user.get('locale')
-    if request.headers.get('locale') in Config.LANGUAGES:
-        return request.headers.get('locale')
+    if hasattr(g, "user"):
+        if g.user.get('locale') in Config.LANGUAGES:
+            return g.user.get('locale')
+    return request.accept_languages.best_match(Config.LANGUAGES)
+
 
 @app.route('/')
 def index():
     """render html template"""
-    return render_template('5-index.html')
+    return render_template('6-index.html')
 
 
 def get_user():
