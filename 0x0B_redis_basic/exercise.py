@@ -20,13 +20,11 @@ class Cache:
     def get(self, key: str,
             fn: Optional[Callable] = None) -> Union[str, bytes, int, float]:
         """convert the data back to the desired format"""
-        try:
-            data = self._redis.get(key)
-            if fn:
-                return fn(data)
-            return data
-        except Exception:
-            pass
+        data = self._redis.get(key)
+        if fn:
+            return fn(data)
+        return data
+
     def get_str(self, key: str) -> str:
         """Automatically parametrize Cache.get to str"""
         data = self._redis.get(key)
@@ -40,4 +38,3 @@ class Cache:
             return data
         except Exception:
             return 0
-        
