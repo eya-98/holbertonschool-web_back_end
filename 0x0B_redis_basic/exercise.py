@@ -6,6 +6,21 @@ from typing import Union, Callable, Optional, Any
 from functools import wraps
 
 
+def call_history(method: Callable) -> Callable:
+    """ store the history of inputs and outputs for a function """
+    key = method.__qualname__
+    inputs = key + ":inputs"
+    outputs = key + ":outputs"
+    @wraps(method)
+    def wrapper(self, *args, **kwds):
+        """ wrapped function """
+        self._redis.rpush(inputs, str(args))
+        data = method(self, *args, **kwds)
+        self._redis.rpush(outputs, str(data))
+        return data
+    return wrapper
+
+
 def count_calls(method: Callable) -> Callable:
     """increments the count for a key every time the method is called"""
     key = method.__qualname__
@@ -23,6 +38,7 @@ class Cache:
         self._redis = redis.Redis()
         self._redis.flushdb()
 
+    @call_history
     @count_calls
     def store(self, data: Union[str, bytes, int, float]) -> str:
         """generate a random key to the stored data"""
