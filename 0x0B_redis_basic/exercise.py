@@ -27,3 +27,17 @@ class Cache:
             return data
         except Exception:
             pass
+    def get_str(self, key: str) -> str:
+        """Automatically parametrize Cache.get to str"""
+        data = self._redis.get(key)
+        return data.decode("utf-8")
+
+    def get_int(self, key: str) -> int:
+        """Automatically parametrize Cache.get to int"""
+        data = self._redis.get(key)
+        try:
+            data = int(data.decode("utf-8"))
+            return data
+        except Exception:
+            return 0
+        
