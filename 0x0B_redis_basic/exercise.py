@@ -67,3 +67,20 @@ class Cache:
             return data
         except Exception:
             return 0
+
+
+def replay(method: Callable):
+    """ display the history of calls of a particular function """
+    key = method.__qualname__
+    inputs = key + ":inputs"
+    outputs = key + ":outputs"
+    redis = method.__self__._redis
+    count = redis.get(key).decode("utf-8")
+    print("{} was called {} times:".format(key, count))
+    inputList = redis.lrange(inputs, 0, -1)
+    outputList = redis.lrange(outputs, 0, -1)
+    redis_zipped = list(zip(inputList, outputList))
+    for attr, data in redis_zipped:
+        attr = attr.decode("utf-8")
+        data = data.decode("utf-8")
+        print("{}(*{}) -> {}".format(key, attr, data))
